@@ -37,17 +37,13 @@ class Solution {
         }
         char[] ans = new char[arr.length-remove];
         int j = 0;
+        i = 0;
         while(!stack.isEmpty())
         {
-            ans[j++] = stack.pop().c;
+            ans[ans.length-1-i] = stack.pop().c;
+            i++;
         }
         char temp;
-        for(i=0;i<ans.length/2;i++)
-        {
-            temp = ans[i];
-            ans[i] = ans[ans.length-i-1];
-            ans[ans.length-i-1] = temp;
-        }
         return new String(ans);
     }
 }
