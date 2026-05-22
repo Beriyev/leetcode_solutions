@@ -1,6 +1,6 @@
 class Solution {
     public List<Integer> majorityElement(int[] nums) {
-        int flr = (int) Math.floor(nums.length/3);
+        int flr = nums.length/3;
         ArrayList<Integer> ans = new ArrayList<>();
         HashMap<Integer,Integer> hash = new HashMap<>();
         int i;
