@@ -1,37 +1,14 @@
 class Solution {
     public char findTheDifference(String s, String t) {
-        char[] str;
-        char[] ser;
-        if(s.length()<t.length())
+        char ans = 0;
+        for(char c : s.toCharArray())
         {
-            str = s.toCharArray();
-            ser = t.toCharArray();
+            ans = (char)(ans ^ c);
         }
-        else 
+        for(char c : t.toCharArray())
         {
-            str = t.toCharArray();
-            ser = s.toCharArray();
+            ans = (char)(ans ^ c);
         }
-        HashMap<Character,Integer> hash = new HashMap<>();
-        for(char c : str)
-        {
-            hash.put(c,hash.getOrDefault(c,0)+1);
-        }
-        for(char c : ser)
-        {
-            if(!hash.containsKey(c))
-            {
-                return c;
-            }
-            else if(hash.get(c)>0)
-            {
-                hash.put(c,hash.get(c)-1);
-            }
-            else if(hash.get(c)==0)
-            {
-                return c;
-            }
-        }
-        return 'a';
+        return ans;
     }
 }
