@@ -9,24 +9,22 @@ class Solution {
         {
             prime[i] = true;
         }
-        for(i=0;i<nums.length;i++)
+        prime[0] = false;
+        if(nums.length>1)
         {
-            counter = 2;
-            if(i==0||i==1)
+            prime[1] = false;
+            for(i=2;i*i<=high;i++)
             {
-                prime[i] = false;
-                continue;
-            }
-            if(!prime[i])
-            {
-                continue;
-            }
-            prod = i*counter;
-            while(prod<=high)
-            {
-                prime[prod] = false;
-                counter++;
-                prod=i*counter;
+                if(!prime[i])
+                {
+                    continue;
+                }
+                prod = i*i;
+                while(prod<=high)
+                {
+                    prime[prod] = false;
+                    prod+=i;
+                }
             }
         }
         
