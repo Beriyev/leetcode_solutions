@@ -14,11 +14,7 @@ class Solution {
         while(list.size()>1)
         {
             counter = 0;
-            while(counter<k-1)
-            {
-                i = (i+1)%list.size();
-                counter++;
-            }
+            i = (i+k-1)%list.size();
             list.remove(i);
         }
         return list.get(0);
