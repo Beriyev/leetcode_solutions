@@ -3,17 +3,17 @@ class Solution {
         int i;
         int left = 0;
         int right = k-1;
-        double avg = 0;
+        int sum = 0;
         int count = 0;
 
         for(i=0;i<=right;i++)
         {
-            avg+= (double)arr[i]/k;
+            sum += arr[i];
         }
 
         while(right<arr.length)
         {
-            if(avg>=threshold)
+            if(sum>=threshold*k)
             {
                 count++;
             }
@@ -21,10 +21,10 @@ class Solution {
             {
                 break;
             }
-            avg-= (double)arr[left]/k;
+            sum-=arr[left];
             left++;
             right++;
-            avg+= (double)arr[right]/k;
+            sum+=arr[right];
         }
 
         return count;
