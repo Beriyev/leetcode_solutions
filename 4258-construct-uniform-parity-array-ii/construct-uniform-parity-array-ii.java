@@ -16,8 +16,12 @@ class Solution {
         }
         else
         {
-            Arrays.sort(nums1);
-            if(nums1[0]%2==1)
+            int min = Integer.MAX_VALUE;
+            for(int num : nums1)
+            {
+                min = Math.min(min,num);
+            }
+            if(min%2==1)
             {
                 return true;
             }
