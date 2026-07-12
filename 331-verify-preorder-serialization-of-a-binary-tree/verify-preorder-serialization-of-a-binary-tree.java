@@ -1,26 +1,26 @@
 class Solution {
-    int idx = 0;
-
     public boolean isValidSerialization(String preorder) {
-        String[] strings = preorder.split(",");
-        Stack<String> stack = new Stack<>();
-        stack.push(strings[0]);
+        String[] arr = preorder.split(",");
         int i;
-        for(i=1;i<strings.length;i++)
+        ArrayList<String> list = new ArrayList<>();
+        for(i=0;i<arr.length;i++)
         {
-            stack.push(strings[i]);
-            while(stack.size()>=3&&stack.get(stack.size()-1).equals("#")&&stack.get(stack.size()-2).equals("#")&&!stack.get(stack.size()-3).equals("#"))
+            list.add(arr[i]);
+            while(list.size()>=3&&list.get(list.size()-1).equals("#")&&list.get(list.size()-2).equals("#")&&!list.get(list.size()-3).equals("#"))
             {
-                stack.pop();
-                stack.pop();
-                stack.pop();
-                stack.push("#");
+                list.remove(list.size()-1);
+                list.remove(list.size()-1);
+                list.remove(list.size()-1);
+                list.add("#");
             }
         }
-        if(stack.size()==1&&stack.peek().equals("#"))
+        if(list.size()==1&&list.get(0).equals("#"))
         {
             return true;
         }
-        return false;
+        else
+        {
+            return false;
+        }
     }
 }
