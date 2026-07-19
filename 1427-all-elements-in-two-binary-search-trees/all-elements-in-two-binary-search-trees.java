@@ -16,16 +16,46 @@
 class Solution {
     List<Integer> root1List = new ArrayList<>();
     List<Integer> root2List = new ArrayList<>();
+    List<Integer> ans = new ArrayList<>();
 
     public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
         get(root1,root1List);
-        get(root2,root1List);
-        root1List.addAll(root2List);
-        Collections.sort(root1List);
-        return root1List;
+        get(root2,root2List);
+        int i=0;
+        int j=0;
+        while(i<root1List.size()&&j<root2List.size())
+        {
+            if(root1List.get(i)<root2List.get(j))
+            {
+                ans.add(root1List.get(i));
+                i++;
+            }
+            else
+            {
+                ans.add(root2List.get(j));
+                j++;
+            }
+        }
+        if(j==root2List.size())
+        {
+            while(i<root1List.size())
+            {
+                ans.add(root1List.get(i));
+                i++;
+            }
+        }
+        else
+        {
+            while(j<root2List.size())
+            {
+                ans.add(root2List.get(j));
+                j++;
+            }
+        }
+        return ans;
     }
 
-    void get(TreeNode root, List list)
+    void get(TreeNode root, List<Integer> list)
     {
         if(root==null)
         {
