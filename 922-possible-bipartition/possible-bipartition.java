@@ -1,64 +1,50 @@
 class Solution {
     public boolean possibleBipartition(int n, int[][] dislikes) {
         int[] colours = new int[n+1];
-        int i;
+        HashMap<Integer,ArrayList<Integer>> hash = new HashMap<>();
         LinkedList<Integer> queue = new LinkedList<>();
+        int i = 1;
+        for(i=1;i<=n;i++)
+        {
+            hash.put(i,new ArrayList<>());
+        }
+        for(int[] dislike : dislikes)
+        {
+            hash.get(dislike[0]).add(dislike[1]);
+            hash.get(dislike[1]).add(dislike[0]);
+        }
 
         for(i=1;i<=n;i++)
         {
             if(colours[i]==0)
             {
-                queue.offer(i);
                 colours[i] = 1;
-
-                while(!queue.isEmpty())
+                queue.offer(i);
+            }
+            while(!queue.isEmpty())
+            {
+                int ele = queue.poll();
+                for(int neighbour : hash.get(ele))
                 {
-                    int ele = queue.poll();
-                    for(int[] dislike : dislikes)
+                    if(colours[neighbour]==colours[ele])
                     {
-                        if(ele==dislike[0])
+                        return false;
+                    }
+                    if(colours[neighbour]==0)
+                    {
+                        if(colours[ele]==1)
                         {
-                            if(colours[dislike[1]]==colours[ele])
-                            {
-                                return false;
-                            }
-                            if(colours[dislike[1]]==0)
-                            {
-                                if(colours[ele]==1)
-                                {
-                                    colours[dislike[1]] = 2;
-                                }
-                                else
-                                {
-                                    colours[dislike[1]] = 1;
-                                }
-                                queue.offer(dislike[1]);
-                            }
+                            colours[neighbour] = 2;
                         }
-                        else if(ele==dislike[1])
+                        else
                         {
-                            if(colours[dislike[0]]==colours[ele])
-                            {
-                                return false;
-                            }
-                            if(colours[dislike[0]]==0)
-                            {
-                                if(colours[ele]==1)
-                                {
-                                    colours[dislike[0]] = 2;
-                                }
-                                else
-                                {
-                                    colours[dislike[0]] = 1;
-                                }
-                                queue.offer(dislike[0]);
-                            }
+                            colours[neighbour] = 1;
                         }
+                        queue.offer(neighbour);
                     }
                 }
             }
         }
-            
         return true;
     }
 }
